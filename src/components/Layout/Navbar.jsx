@@ -1,49 +1,54 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FileUp } from 'lucide-react'; // Adding a modern upload icon
+import { FileUp, Menu } from 'lucide-react'; 
 import logo from '../../assets/logo.png'; 
 
 const Navbar = () => (
-  <nav className="flex justify-between items-center px-8 py-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
+  <nav className="flex justify-between items-center px-10 py-5 bg-[#004643] border-b border-white/10 sticky top-0 z-[999] w-full">
+    
     {/* --- LOGO SECTION --- */}
-    <Link to="/" className="flex items-center gap-3 group">
-      <motion.img 
-        whileHover={{ rotate: 5 }}
+    <Link to="/" className="flex items-center gap-3">
+      <img 
         src={logo} 
         alt="PlacePro AI Logo" 
         className="h-10 w-auto" 
       />
-      <span className="text-2xl font-black text-slate-900 tracking-tighter uppercase hidden md:block">
-        PlacePro <span className="text-blue-600">AI</span>
+      <span className="text-2xl font-black text-[#F0EDE5] tracking-tighter uppercase hidden md:block">
+        PlacePro <span className="text-[#C87740]">AI</span>
       </span>
     </Link>
     
-    {/* --- NAV LINKS --- */}
-    <div className="flex items-center gap-8 text-sm font-bold text-slate-500 uppercase tracking-widest">
-      <Link to="/jobs" className="hover:text-blue-600 transition-colors">Job Board</Link>
-      
-      {/* New: Upload Resume Link with Icon */}
-      <Link 
-        to="/dashboard/student/upload" 
-        className="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition-all group"
-      >
-        <FileUp size={18} className="group-hover:-translate-y-0.5 transition-transform text-blue-600" />
-        <span>Upload Resume</span>
-      </Link>
+    {/* --- NAVIGATION & ACTIONS --- */}
+    <div className="flex items-center gap-8">
+      {/* Desktop Links */}
+      <div className="hidden lg:flex items-center gap-8 text-[11px] font-black text-[#F0EDE5]/70 uppercase tracking-[0.2em]">
+        <Link to="/jobs" className="hover:text-[#C87740] transition-colors">Job Board</Link>
+        <Link to="/about" className="hover:text-[#C87740] transition-colors">About</Link>
+      </div>
 
-      <div className="h-6 w-px bg-slate-200 mx-2 hidden sm:block"></div> {/* Divider */}
-
-      <Link to="/login" className="hover:text-blue-600 transition-colors">Sign In</Link>
-      
-      <Link to="/register">
-        <motion.button 
-          whileHover={{ y: -2, scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-black text-xs tracking-widest uppercase shadow-lg shadow-slate-200 hover:bg-blue-600 transition-colors"
-        >
-          Register
-        </motion.button>
-      </Link>
+      <div className="flex items-center gap-4">
+        <Link to="/login" className="text-[11px] font-black text-[#F0EDE5] uppercase tracking-widest hover:text-[#C87740] px-4">
+          Sign In
+        </Link>
+        
+        {/* --- THE REGISTER BUTTON --- */}
+    <Link to="/register" className="relative z-[1000]">
+  <button 
+    /* 
+       1. Removed whileHover and whileTap from framer-motion
+       2. Set static background to #C87740 (Caramel Orange)
+       3. Set static text to #FFFFFF (White) 
+    */
+    className="block bg-[#C87740] text-[#FFFFFF] px-8 py-3 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+  >
+    Register Now
+  </button>
+</Link>
+        
+        <div className="lg:hidden text-[#F0EDE5]">
+          <Menu size={24} />
+        </div>
+      </div>
     </div>
   </nav>
 );

@@ -3,26 +3,39 @@ import logo from '../../assets/logo.png';
 
 const SplashScreen = () => {
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-[100]">
+    /* Background changed to White for a clean, minimalist look */
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-[9999]">
       <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         className="flex flex-col items-center"
       >
-        <img src={logo} alt="Logo" className="h-24 w-auto mb-6" />
-        <h1 className="text-3xl font-bold text-blue-700">PlacePro AI RecruitX</h1>
+        {/* --- LOGO --- */}
+        <img src={logo} alt="PlacePro AI Logo" className="h-20 w-auto mb-6" />
         
-        {/* Loading Indicator */}
-        <div className="mt-8 w-48 h-1 bg-gray-100 rounded-full overflow-hidden">
+        {/* --- TAGLINE (Brand Title) --- */}
+        <h1 className="text-3xl font-black text-[#004643] tracking-tighter uppercase">
+          PlacePro <span className="text-[#C87740]">AI</span>
+        </h1>
+        
+        <p className="mt-2 text-[10px] font-black text-black uppercase tracking-[0.4em]">
+          Next-Gen Campus Hiring
+        </p>
+        
+        {/* --- LOADING LINE --- */}
+        <div className="mt-10 w-48 h-1 bg-[#004643]/5 rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-blue-600"
+            className="h-full bg-[#C87740]" // Caramel loading bar
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
           />
         </div>
-        <p className="mt-4 text-gray-500 animate-pulse text-sm">Initializing NLP Engine...</p>
+{/* 
+        <p className="mt-4 text-[#004643]/60 text-[10px] font-bold uppercase tracking-[0.2em]">
+          Initializing NLP Engine...
+        </p> */}
       </motion.div>
     </div>
   );

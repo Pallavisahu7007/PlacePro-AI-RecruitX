@@ -2,253 +2,533 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Layout/Navbar';
+import logo from '../assets/logo.png'; 
 import { 
   Cpu, Zap, ShieldCheck, GraduationCap, ChevronRight, 
-  Search, BarChart3, Rocket, User, Building, ArrowRight, 
-  Play, Sparkles, Calendar, Globe, Layers
+  Search, BarChart3, Rocket, User, Building, ArrowRight, ArrowUpRight,
+  
+  Layout, 
+
+  Workflow, 
+
+
+  Sparkles, FileUp, Globe, Mail, Link as LinkIcon,
+  Briefcase, PieChart, Award, Database
 } from 'lucide-react';
 
 const LandingPage = () => {
+  // Theme Palette:
+  // Bone Background: #F0EDE5
+  // Deep Pine Primary: #004643
+
   return (
-    <div className="bg-[#0a0c10] min-h-screen font-sans text-slate-300 overflow-x-hidden">
+    <div className="bg-[#F0EDE5] min-h-screen font-sans text-[#004643] overflow-x-hidden relative">
       <Navbar />
 
-<section className="relative pt-8 pb-20 lg:pt-16 lg:pb-32 overflow-hidden flex items-center min-h-[80vh]">
-  {/* Ambient Deccan AI Glows */}
-  <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -z-0" />
-  <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[100px] -z-0" />
-
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
-      
-      {/* Left Content: Broad & Dominant (8/12) */}
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="lg:w-8/12 text-left"
+      {/* --- FLOATING 3D RESUME WIDGET (WhatsApp Style) --- */}
+      <Link to="/dashboard/student/upload"><motion.div 
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-8 right-8 z-50 bg-[#004643] text-[#F0EDE5] p-5 rounded-3xl shadow-[0_20px_50px_rgba(0,70,67,0.4)] cursor-pointer border-2 border-[#F0EDE5] flex flex-col items-center gap-2 group"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 font-bold text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(37,99,235,0.2)]">
-          <Sparkles size={14} className="animate-pulse" /> Next-Gen AI Recruitment
-        </div>
+        <FileUp size={32} className="group-hover:animate-bounce" />
+        <span className="text-[10px] font-black uppercase tracking-tighter opacity-0 opacity-100">Upload</span>
+      </motion.div></Link>
+
+      {/* --- HERO SECTION: VIEWPORT LOCKED 3D --- */}
+  <section className="relative h-[95vh] flex items-center overflow-hidden bg-[#F0EDE5]">
+  {/* --- ENHANCED BACKGROUND GRID --- */}
+  {/* This creates a clean technical blueprint look in the background */}
+  <div className="absolute inset-0 pointer-events-none opacity-[0.3]" 
+    style={{ 
+      backgroundImage: `
+        linear-gradient(#004643 1.5px, transparent 1.5px), 
+        linear-gradient(90deg, #004643 1.5px, transparent 1.5px)
+      `, 
+      backgroundSize: '60px 60px',
+      maskImage: 'radial-gradient(ellipse at center, black, transparent 80%)',
+      WebkitMaskImage: 'radial-gradient(ellipse at center, black, transparent 80%)'
+    }} 
+  />
+
+  {/* Decorative 3D Ambient Orbs */}
+  <div className="absolute top-20 left-10 w-72 h-72 bg-[#004643]/10 rounded-full blur-[100px] animate-pulse" />
+  <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#004643]/15 rounded-full blur-[120px]" />
+
+  <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+      
+      {/* Left Content */}
+      <motion.div 
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="lg:w-1/2 text-left space-y-8"
+      >
+        {/* PlacePro AI RecruitX with Animation */}
+        <motion.div 
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-5 py-2 bg-[#004643] text-[#F0EDE5] rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(0,70,67,0.3)] border border-[#F0EDE5]/20"
+        >
+          <Sparkles size={14} className="text-yellow-400" /> PlacePro AI RecruitX
+        </motion.div>
         
-        <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[1.05] mb-8 text-white">
+        <h1 className="text-6xl lg:text-6xl font-black tracking-tighter leading-[0.9] text-[#004643]">
           Find Your Dream Job <br />
-          <span className="text-cyan-400">With AI Precision</span>
+          
+        <motion.span 
+  initial={{ backgroundPosition: "0% 50%" }}
+  animate={{ 
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+  }}
+  transition={{ 
+    duration: 6, 
+    repeat: Infinity, 
+    ease: "easeInOut" 
+  }}
+  className="inline-block mt-4 pb-2 text-7xl lg:text-8xl bg-gradient-to-r from-[#2E1F26] via-[#C87740] to-[#2E1F26] bg-clip-text text-transparent bg-clip-text bg-[length:200%_auto] bg-clip-text drop-shadow-[0_10px_15px_rgba(46,31,38,0.2)] font-black tracking-tighter"
+>
+  With AI Precision
+</motion.span>
         </h1>
 
-        <p className="text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed font-medium">
-          The AI powered ecosystem for campus hiring. We bridge the gap between 
-          top-tier talent and industry leaders using automated NLP screening.
+        <p className="text-xl text-[#004643]/70 max-w-lg leading-relaxed font-medium">
+          We bridge the gap between undergraduate talent and industry leaders using automated NLP screening.
         </p>
 
         <div className="flex flex-wrap gap-5">
           <Link to="/register">
             <motion.button 
-              whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 40px rgba(37, 99, 235, 0.3)" }}
-              className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-sm flex items-center gap-2 shadow-xl transition-all"
+              whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(0, 70, 67, 0.4)" }}
+              className="px-12 py-5 bg-[#004643] text-[#F0EDE5] rounded-2xl font-black text-sm flex items-center gap-3 transition-all border border-[#F0EDE5]/10 shadow-[0_15px_30px_rgba(0,70,67,0.3)]"
             >
               Get Started <ArrowRight size={18} />
             </motion.button>
           </Link>
-          <button className="px-10 py-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl font-black text-sm text-white hover:bg-white/10 transition-all flex items-center gap-2">
-            <Play size={18} fill="currentColor" className="text-blue-400" /> Watch Demo
+           <Link to="/jobs">
+          <button className="px-12 py-5 bg-white/50 backdrop-blur-sm border-2 border-[#004643] rounded-2xl font-black text-sm text-[#004643] hover:bg-[#004643] hover:text-[#F0EDE5] transition-all shadow-md">
+            Explore Positions
           </button>
+          </Link>
         </div>
       </motion.div>
 
-      {/* Right Visual: Ultra-Compact & Glowing (4/12) */}
+      {/* Right Visual: 3D Image with Heavy Shadows */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
-        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-        transition={{ duration: 1 }}
-        className="lg:w-4/12 hidden lg:block perspective-1000 relative group"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="lg:w-5/12 relative flex justify-center items-center"
       >
-        {/* Multi-layered Gradient Shadow (Bloom) */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/40 via-indigo-500/20 to-cyan-400/40 blur-[50px] rounded-[3rem] -z-10 group-hover:blur-[70px] transition-all duration-700 opacity-90" />
-
-        <div className="relative p-1.5 bg-gradient-to-tr from-white/15 to-transparent rounded-[2.5rem] shadow-2xl border border-white/10 backdrop-blur-md">
-          <div className="bg-slate-900 rounded-[2rem] overflow-hidden border-2 border-slate-700 shadow-inner relative">
-            
-            {/* The GIF Container */}
-            <div className="aspect-[4/5] overflow-hidden">
-                <img 
-                src="https://static01.nyt.com/images/2018/12/07/business/07hiring/07hiring-superJumbo-v2.gif" 
-                className="w-full h-full object-cover opacity-80 mix-blend-screen transform scale-110"
-                alt="AI Interface"
-                />
-            </div>
-            
-            {/* Scanline Deccan AI effect */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_3px,4px_100%] pointer-events-none" />
+        <motion.div 
+          animate={{ y: [0, -15, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative w-full max-w-[650px] bg-white p-2 rounded-[3.5rem] shadow-[0_60px_120px_rgba(0,40,38,0.5)] border-3 border-[#004643]"
+        >
+          <div className="rounded-[3rem] overflow-hidden border-5 border-[#004643] shadow-[inset_0_4px_20px_rgba(0,0,0,0.1)] relative aspect-square bg-[#004643]/5">
+            <img 
+              src="https://static01.nyt.com/images/2018/12/07/business/07hiring/07hiring-superJumbo-v2.gif" 
+              className="w-full h-full object-cover scale-110"
+              alt="AI Recruitment Interface"
+            />
           </div>
-        </div>
+
+<motion.div 
+  animate={{ y: [0, 8, 0] }} 
+  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute -top-6 -left-6 p-4 px-6 bg-[#00A19B]/60 backdrop-blur-lg text-white rounded-2xl shadow-[0_20px_40px_rgba(200,119,64,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center gap-3 border border-white/30"
+>
+  <ShieldCheck size={20} className="text-white drop-shadow-md" />
+  <span className="text-xs font-black uppercase tracking-[0.15em] drop-shadow-md">
+    AI Verified
+  </span>
+</motion.div>
+        </motion.div>
       </motion.div>
-      
     </div>
   </div>
 </section>
+{/* --- PLATFORM FEATURES: 3D CARDS --- */}
+ <section className="relative py-24 bg-[#F0EDE5] overflow-hidden">
+  {/* Subtly faded background grid for technical depth */}
+  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+    style={{ backgroundImage: `linear-gradient(#004643 1px, transparent 1px), linear-gradient(90deg, #004643 1px, transparent 1px)`, backgroundSize: '50px 50px' }} 
+  />
 
-      {/* --- NEW: EVENTS & HACKATHONS SECTION --- */}
-      <section className="py-24 bg-white/[0.02] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="Live Events" subtitle="Upcoming placement drives and technical events" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-            <EventCard title="Google Cloud Drive" date="MAY 15" tag="Placements" />
-            <EventCard title="Deccan Hack 2026" date="JUN 02" tag="Hackathon" />
-            <EventCard title="Mock Interview Week" date="MAY 20" tag="Training" />
-            <EventCard title="Microsoft Hiring" date="JUN 12" tag="Placements" />
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <SectionHeader 
+      title="Platform Features" 
+      subtitle="Cutting-edge NLP technology for campus recruitment" 
+      className="text-[#004643]"
+    />
+    
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
+      <FeatureCard 
+        icon={<Cpu size={32} />} 
+        title="Neural Screening" 
+        desc="LLM-based context parsing that understands project depth beyond keywords." 
+      />
+      <FeatureCard 
+        icon={<ShieldCheck size={32} />} 
+        title="Smart Eligibility" 
+        desc="Real-time validation of branch and academic criteria for instant shortlisting." 
+      />
+      <FeatureCard 
+        icon={<Zap size={32} />} 
+        title="Pulse Alerts" 
+        desc="Instant notifications for new job postings and real-time slot booking updates." 
+      />
+      <FeatureCard 
+        icon={<Layout size={32} />} 
+        title="SaaS Dashboard" 
+        desc="Modern high-contrast UI for managing enterprise recruitment at scale." 
+      />
+      <FeatureCard 
+        icon={<Database size={32} />} 
+        title="Verified Sync" 
+        desc="Seamless integration with university ERPs for verified CGPA and record matching." 
+      />
+      <FeatureCard 
+        icon={<Workflow size={32} />} 
+        title="NLP Pipeline" 
+        desc="Automated ranking of candidates based on industry-specific semantic scoring." 
+      />
+    </div>
+  </div>
+</section>
+  {/* --- STEPS: VERTICAL ROADMAP --- */}
+<section className="relative py-10 bg-[#F0EDE5] overflow-hidden">
+  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+    style={{ backgroundImage: `linear-gradient(#004643 1px, transparent 1px), linear-gradient(90deg, #004643 1px, transparent 1px)`, backgroundSize: '60px 60px' }} 
+  />
 
-      {/* --- THE PROCESS: 3D STEP CARDS --- */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="The Process" subtitle="A simple, intelligent 6-step journey" />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mt-20">
-            {['Register', 'Profile', 'Upload', 'AI Screen', 'Apply', 'Hired'].map((step, i) => (
-              <StepCard key={i} num={i + 1} title={step} active={i === 3} />
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="max-w-5xl mx-auto px-6 relative z-10">
+    <SectionHeader 
+      title="The Steps" 
+      subtitle="Your career roadmap from profile to offer" 
+      className="text-[#004643]"
+    />
+    
+    {/* Reduced space-y from 24 to 8 for a closer, tighter roadmap flow */}
+    <div className="mt-16 space-y-8 relative">
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#004643] via-[#C87740] to-transparent -translate-x-1/2 hidden md:block opacity-20" />
+      
+      <VerticalStep num="1" title="Academic Sync" desc="Connect your university ID and verified CGPA records." side="left" icon={<User size={24} />} />
+      <VerticalStep num="2" title="Skill Mapping" desc="AI-driven analysis of your GitHub and portfolio." side="right" icon={<PieChart size={24} />} />
+      <VerticalStep num="3" title="NLP Screening" desc="Technical verification score based on job criteria." side="left" icon={<ShieldCheck size={24} />} />
+      <VerticalStep num="4" title="Final Hired" desc="Receive direct scheduling links for HR rounds." side="right" icon={<Award size={24} />} />
+    </div>
+  </div>
+</section>
+  {/* --- USER PORTALS: CENTERED 3D --- */}
+<section className="relative py-24 bg-[#004643] overflow-hidden">
+  {/* Background glow effects for 3D depth */}
+  <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C87740]/10 rounded-full blur-[120px] pointer-events-none" />
+  <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* --- CAPABILITIES: STAYED SAME AS REQUESTED --- */}
-      <section className="py-32 bg-white/[0.02] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="Capabilities" subtitle="Next-gen features for a high-impact experience" />
-          <div className="grid md:grid-cols-3 gap-10 mt-20">
-            <FeatureCard icon={<Cpu />} title="AI Screening" desc="Deep NLP parsing for skill extraction and job matching." />
-            <FeatureCard icon={<ShieldCheck />} title="Smart Eligibility" desc="Automated checks for CGPA, branch, and technical filters." />
-            <FeatureCard icon={<Zap />} title="Real-time Alerts" desc="Instant notifications for upcoming placement drives." />
-            <FeatureCard icon={<BarChart3 />} title="Admin Analytics" desc="Detailed visibility over placement success rates." />
-            <FeatureCard icon={<Building />} title="Recruiter Portal" desc="Efficient tools for companies to manage talent pipelines." />
-            <FeatureCard icon={<Search />} title="Easy Search" desc="Quickly find the right candidates with smart filters." />
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
+    <SectionHeader 
+      title="Select Portal" 
+      subtitle="Access your personalized enterprise dashboard" 
+      white 
+    />
+    
+    <div className="grid md:grid-cols-3 gap-10 mt-24 max-w-6xl mx-auto">
+      <RoleCard icon={<GraduationCap size={40} />} role="Student" desc="Access placement drives & mock tests." />
+      <RoleCard icon={<Building size={40} />} role="Recruiter" desc="Manage job postings & NLP screening." />
+      <RoleCard icon={<User size={40} />} role="TPO Admin" desc="University-wide analytics & data sync." />
+    </div>
+  </div>
+</section>
+      {/* --- JOB OPPORTUNITIES: 3D GRID --- */}
+<section className="relative py-24 bg-[#F0EDE5] overflow-hidden">
+  {/* Subtly faded background grid */}
+  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+    style={{ backgroundImage: `linear-gradient(#004643 1px, transparent 1px), linear-gradient(90deg, #004643 1px, transparent 1px)`, backgroundSize: '40px 40px' }} 
+  />
 
-      {/* --- NEW: GLOBAL REACH --- */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2">
-              <SectionHeader title="Global Network" subtitle="Connected with 500+ global enterprises" left />
-              <p className="mt-6 text-slate-400 text-lg leading-relaxed">
-                Our platform doesn't just work locally. We have integrated recruiters from over 15 countries, 
-                giving you access to international opportunities and global career growth.
-              </p>
-              <div className="flex gap-8 mt-10">
-                <div className="text-center">
-                  <div className="text-3xl font-black text-white">500+</div>
-                  <div className="text-xs text-blue-500 uppercase tracking-widest mt-2">Companies</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-black text-white">50k+</div>
-                  <div className="text-xs text-blue-500 uppercase tracking-widest mt-2">Placed</div>
-                </div>
-              </div>
-            </div>
-            <div className="lg:w-1/2 p-8 bg-blue-600/10 rounded-[3rem] border border-blue-500/20 shadow-[0_0_50px_rgba(37,99,235,0.1)]">
-              <Globe className="w-full h-auto text-blue-500 opacity-50" size={300} />
-            </div>
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <SectionHeader 
+      title="Job Opportunities" 
+      subtitle="Direct placement drives for the 2026 Batch" 
+      className="text-[#004643]"
+    />
+     <Link to="/jobs">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+      <EnhancedJobCard title="Software Engineer" company="Google India" salary="15 LPA" icon={<Cpu size={28} />} />
+      <EnhancedJobCard title="UI/UX Designer" company="Adobe" salary="20 LPA" icon={<Sparkles size={28} />} />
+      <EnhancedJobCard title="Data Architect" company="Microsoft" salary="5 LPA" icon={<Database size={28} />} />
+      <EnhancedJobCard title="Systems Lead" company="TCS Ninja" salary="12 LPA" icon={<Zap size={28} />} />
+    </div></Link>
 
-      {/* --- USER ROLES: 3D CARDS --- */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-          <RoleCard icon={<GraduationCap />} role="Student" />
-          <RoleCard icon={<Building />} role="Recruiter" />
-          <RoleCard icon={<User />} role="Admin" />
-        </div>
-      </section>
+    {/* --- NEW VIEW ALL SECTION --- */}
+    <div className="mt-20 flex justify-center">
+      <motion.button
+        whileHover={{ scale: 1.05, y: -5 }}
+        whileTap={{ scale: 0.95 }}
+        className="group relative flex items-center gap-3 px-10 py-5 bg-[#004643] text-[#F0EDE5] rounded-full font-black uppercase tracking-widest text-sm shadow-[0_20px_40px_rgba(0,70,67,0.3)] hover:bg-[#C87740] hover:shadow-[0_20px_40px_rgba(200,119,64,0.3)] transition-all duration-300"
+      >
+        <Link to="/jobs"><span>View All Opportunities</span></Link> 
+        <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-300" />
+        
+        {/* Subtle 3D Inner Light Effect */}
+        <div className="absolute inset-0 rounded-full border border-white/10 pointer-events-none" />
+      </motion.button>
+    </div>
+  </div>
+</section>
+    
 
-      {/* --- FOOTER --- */}
-      <footer className="py-20 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
-          <h3 className="text-2xl font-black text-blue-500 uppercase tracking-tighter">PlacePro AI</h3>
-          <div className="flex gap-10 text-xs font-black text-slate-500 uppercase tracking-widest">
-            <Link to="/jobs" className="hover:text-blue-400 transition-colors">Jobs</Link>
-            <Link to="/about" className="hover:text-blue-400 transition-colors">About</Link>
-            <Link to="/privacy" className="hover:text-blue-400 transition-colors">Privacy</Link>
-          </div>
-          <p className="text-xs font-bold text-slate-600 uppercase tracking-widest">© 2026 RecruitX Module</p>
+      {/* --- FOOTER: STRUCTURED 3D --- */}
+     <footer className="relative py-24 bg-[#F0EDE5] border-t border-[#004643]/10 overflow-hidden">
+  {/* Subtly faded background grid for technical continuity */}
+  <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
+    style={{ backgroundImage: `linear-gradient(#004643 1px, transparent 1px), linear-gradient(90deg, #004643 1px, transparent 1px)`, backgroundSize: '40px 40px' }} 
+  />
+
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <div className="grid md:grid-cols-3 gap-16 items-start">
+      
+      {/* Brand Section */}
+  <div className="space-y-6 text-center md:text-left">
+  {/* --- LOGO IMAGE --- */}
+  <div className="flex justify-center md:justify-start">
+    <img 
+      src={logo} 
+      alt="PlacePro AI Logo" 
+      className="h-12 w-auto mb-2 opacity-90 hover:opacity-100 transition-opacity" 
+    />
+  </div>
+
+  {/* --- BRAND TITLE --- */}
+  <h3 className="text-5xl font-black text-[#004643] tracking-tighter uppercase italic">
+    PlacePro <span className="text-[#C87740]">AI</span>
+  </h3>
+
+  {/* --- TAGLINE --- */}
+  <p className="text-sm font-bold text-[#004643]/60 leading-relaxed max-w-xs mx-auto md:mx-0">
+    A next-generation platform for campus hiring, engineered to bridge the gap between talent and industry.
+  </p>
+</div>
+      {/* Quick Links with 3D Hover effect */}
+      <div className="flex flex-col gap-6 items-center md:items-start">
+        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-[#004643]/40">Sitemap</span>
+        <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+          {['Job Board', 'Hackathons', 'Help Desk', 'About Us'].map((item) => (
+            <motion.div key={item} whileHover={{ x: 5, color: '#C87740' }} className="cursor-pointer">
+              <Link to={`/${item.toLowerCase().replace(' ', '')}`} className="text-sm font-black text-[#004643] transition-colors">
+                {item}
+              </Link>
+            </motion.div>
+          ))}
         </div>
-      </footer>
+      </div>
+
+      {/* Connect Section with Floating Icons */}
+      <div className="flex flex-col gap-8 items-center md:items-end">
+        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-[#004643]/40">Connect</span>
+        {/* Replace the social icons map with this version */}
+<div className="flex gap-4">
+  {[
+    { icon: <Globe size={20} />, label: 'Web' },
+    { icon: <Mail size={20} />, label: 'Mail' },
+    { icon: <LinkIcon size={20} />, label: 'Profile' } // Changed to a standard Link icon
+  ].map((social, i) => (
+    <motion.div
+      key={i}
+      whileHover={{ 
+        y: -8, 
+        scale: 1.1, 
+        backgroundColor: '#C87740', // Transitions to your Caramel brand color
+        boxShadow: "0px 15px 30px rgba(200, 119, 64, 0.4)" 
+      }}
+      className="p-4 bg-[#004643] text-[#F0EDE5] rounded-2xl cursor-pointer shadow-[0_10px_20px_rgba(0,70,67,0.2)] transition-all duration-300"
+    >
+      {social.icon}
+    </motion.div>
+  ))}
+</div>
+      
+      </div>
+    </div>
+
+    {/* Signature Bottom Bar */}
+    <div className="mt-24 pt-12 border-t border-[#004643]/5 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="text-[10px] font-black uppercase tracking-[0.4em] text-[#004643]/40">
+        © 2026 PlacePro AI 
+      </div>
+      <div className="flex gap-8">
+        <span className="text-[9px] font-black uppercase tracking-widest text-[#004643]/30 cursor-pointer hover:text-[#C87740] transition-colors">Privacy Policy</span>
+        <span className="text-[9px] font-black uppercase tracking-widest text-[#004643]/30 cursor-pointer hover:text-[#C87740] transition-colors">Terms of Service</span>
+      </div>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };
 
-// --- SUB COMPONENTS ---
+// --- SUB-COMPONENTS ---
 
-const SectionHeader = ({ title, subtitle, left }) => (
-  <div className={left ? "text-left" : "text-center"}>
-    <h2 className="text-4xl lg:text-6xl font-black text-white uppercase tracking-tighter mb-4">{title}</h2>
-    <p className="text-slate-500 text-lg font-medium tracking-wide">{subtitle}</p>
-    <div className={`h-1.5 w-20 bg-blue-600 ${left ? "" : "mx-auto"} mt-8 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]`} />
+const SectionHeader = ({ title, subtitle, white }) => (
+  <div className="text-center">
+    <h2 className={`text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-4 ${white ? 'text-[#F0EDE5]' : 'text-[#004643]'}`}>{title}</h2>
+    <p className={`text-lg font-medium ${white ? 'opacity-60' : 'text-[#004643]/60'}`}>{subtitle}</p>
+    <div className={`h-2 w-24 mx-auto mt-8 rounded-full ${white ? 'bg-[#F0EDE5]' : 'bg-[#004643]'} shadow-xl`} />
   </div>
 );
 
-const StepCard = ({ num, title, active }) => (
-  <motion.div 
-    whileHover={{ y: -10, rotateX: 5 }}
-    className={`p-10 rounded-[2.5rem] border-2 transition-all cursor-default ${
-      active ? 'bg-blue-600 border-blue-400 text-white shadow-[0_20px_50px_rgba(37,99,235,0.3)] scale-110 z-10' : 'bg-slate-900 border-white/5 text-slate-400 shadow-xl'
-    }`}
-  >
-    <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-black text-xl shadow-md ${active ? 'bg-white text-blue-600' : 'bg-blue-500/20 text-blue-500'}`}>
-      {num}
-    </div>
-    <h4 className="text-[10px] font-black uppercase tracking-widest leading-relaxed">{title}</h4>
-  </motion.div>
-);
+const EnhancedJobCard = ({ title, company, salary, icon }) => {
+  return (
+    <motion.div
+      whileHover={{ 
+        y: -12, 
+        scale: 1.02,
+        rotateX: 2,
+        rotateY: -2
+      }}
+      className="group relative h-full p-1 bg-white rounded-[2rem] border-2 border-[#004643]/10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_40px_80px_rgba(0,70,67,0.15)] hover:border-[#004643]"
+    >
+      <div className="bg-[#F8F9F8] h-full rounded-[1.8rem] p-8 flex flex-col justify-between overflow-hidden relative">
+        {/* Animated Background Shimmer on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#004643]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-const FeatureCard = ({ icon, title, desc }) => (
-  <motion.div 
-    whileHover={{ y: -12, scale: 1.02 }}
-    className="p-10 bg-slate-900/50 border border-white/5 rounded-[3rem] shadow-2xl hover:border-blue-500/30 transition-all relative overflow-hidden group"
-  >
-    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-150 transition-transform text-white">
-      {React.cloneElement(icon, { size: 100 })}
-    </div>
-    <div className="w-16 h-16 bg-blue-600 text-white rounded-3xl flex items-center justify-center mb-8 shadow-lg shadow-blue-500/20">
-      {React.cloneElement(icon, { size: 28 })}
-    </div>
-    <h3 className="text-2xl font-black mb-4 text-white uppercase tracking-tight">{title}</h3>
-    <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
-  </motion.div>
-);
+        <div className="relative z-10">
+          {/* Professional 3D Icon Container */}
+          <div className="w-16 h-16 rounded-2xl bg-[#004643] text-[#F0EDE5] flex items-center justify-center mb-6 shadow-[0_10px_20px_rgba(0,70,67,0.3)] group-hover:bg-[#C87740] group-hover:shadow-[0_15px_30px_rgba(200,119,64,0.4)] transition-all duration-300">
+            {icon}
+          </div>
 
-const EventCard = ({ title, date, tag }) => (
-  <motion.div 
-    whileHover={{ scale: 1.05, y: -5 }}
-    className="p-6 bg-slate-900 border border-white/5 rounded-3xl group cursor-pointer"
-  >
-    <div className="flex justify-between items-start mb-4">
-      <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500 text-[10px] font-black uppercase tracking-widest">{tag}</div>
-      <Calendar size={18} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
-    </div>
-    <h4 className="text-lg font-bold text-white mb-1">{title}</h4>
-    <p className="text-xs text-slate-500 uppercase font-black tracking-widest">{date}</p>
-  </motion.div>
-);
+          <h3 className="text-xl font-black text-[#004643] tracking-tight mb-1">{title}</h3>
+          <p className="text-[#004643]/60 font-bold uppercase text-[10px] tracking-widest">{company}</p>
+        </div>
 
-const RoleCard = ({ icon, role }) => (
-  <motion.div 
-    whileHover={{ rotateY: 15, scale: 1.05, boxShadow: "0_30px_60px_rgba(0,0,0,0.5)" }}
-    className="p-16 bg-slate-900 border border-white/5 rounded-[4rem] text-center shadow-2xl group cursor-pointer border-b-blue-600 border-b-4"
-  >
-    <div className="mb-8 flex justify-center text-blue-500 group-hover:scale-110 transition-transform group-hover:text-blue-400">
-      {React.cloneElement(icon, { size: 60 })}
-    </div>
-    <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">{role}</h3>
-    <div className="text-blue-500 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 group-hover:gap-4 transition-all">
-      Enter Dashboard <ChevronRight size={14} />
-    </div>
-  </motion.div>
-);
+        <div className="mt-10 pt-6 border-t border-[#004643]/5 flex items-center justify-between relative z-10">
+          <div>
+            <p className="text-[10px] uppercase font-black text-[#004643]/40 tracking-wider">Estimated Salary</p>
+            <p className="text-lg font-black text-[#004643]">{salary}</p>
+          </div>
+          
+          <motion.div 
+            whileHover={{ x: 5 }}
+            className="w-10 h-10 rounded-full bg-[#004643]/5 flex items-center justify-center text-[#004643] group-hover:bg-[#004643] group-hover:text-white transition-colors"
+          >
+            <ArrowUpRight size={20} />
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+
+const VerticalStep = ({ num, title, desc, side, icon }) => {
+  const isLeft = side === "left";
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className={`relative flex items-center justify-between w-full ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
+    >
+      {/* Content Card */}
+      <motion.div 
+        whileHover={{ y: -10, scale: 1.02 }}
+        className="w-full md:w-[45%] p-8 bg-white/80 backdrop-blur-md rounded-[2.5rem] border-2 border-[#004643]/5 shadow-[0_20px_50px_rgba(0,70,67,0.05)] hover:shadow-[0_30px_60px_rgba(200,119,64,0.1)] hover:border-[#C87740]/30 transition-all duration-500"
+      >
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-[#004643] text-[#F0EDE5] shadow-[0_10px_20px_rgba(0,70,67,0.2)]">
+            {icon}
+          </div>
+          <span className="text-4xl font-black text-[#004643]/10">0{num}</span>
+        </div>
+        
+        <h3 className="text-2xl font-black text-[#004643] mb-3 tracking-tight">{title}</h3>
+        <p className="text-[#004643]/70 font-medium leading-relaxed">{desc}</p>
+      </motion.div>
+
+      {/* Central Interactive Node */}
+      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center">
+        <motion.div 
+          whileHover={{ scale: 1.5 }}
+          className="w-5 h-5 rounded-full bg-[#F0EDE5] border-4 border-[#004643] shadow-[0_0_20px_rgba(0,70,67,0.4)] z-20" 
+        />
+        <div className="absolute w-12 h-12 rounded-full bg-[#C87740]/20 animate-ping" />
+      </div>
+
+      {/* Spacer for the other side */}
+      <div className="hidden md:block w-[45%]" />
+    </motion.div>
+  );
+};
+const FeatureCard = ({ icon, title, desc }) => {
+  return (
+    <motion.div
+      whileHover={{ y: -10, rotateX: 2, rotateY: -2 }}
+      className="group relative p-8 bg-white rounded-[2.5rem] border-2 border-[#004643]/5 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(0,70,67,0.1)] transition-all duration-500 overflow-hidden"
+    >
+      {/* Invisible Hover Glow */}
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#C87740]/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* 3D Icon Container */}
+      <div className="w-16 h-16 mb-8 flex items-center justify-center rounded-2xl bg-[#004643] text-[#F0EDE5] shadow-[0_10px_20px_rgba(0,70,67,0.2)] group-hover:bg-[#C87740] group-hover:shadow-[0_15px_30px_rgba(200,119,64,0.3)] transition-all duration-500">
+        {icon}
+      </div>
+
+      <h3 className="text-xl font-black text-[#004643] mb-4 tracking-tight">
+        {title}
+      </h3>
+      
+      <p className="text-[#004643]/70 font-medium leading-relaxed">
+        {desc}
+      </p>
+
+      {/* Decorative Corner Element */}
+      <div className="absolute bottom-6 right-8 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+        <div className="w-12 h-1 w-12 bg-[#C87740] rounded-full" />
+      </div>
+    </motion.div>
+  );
+};
+
+const RoleCard = ({ icon, role, desc }) => {
+  return (
+    <motion.div
+      whileHover={{ y: -15, scale: 1.02, rotateY: 5 }}
+      whileTap={{ scale: 0.98 }}
+      className="group relative cursor-pointer"
+    >
+      {/* REPLACED BLACK SHADOW WITH CARAMEL GLOW */}
+      <div className="absolute inset-0 bg-[#C87740]/5 rounded-[2.5rem] blur-2xl group-hover:bg-[#C87740]/20 transition-colors duration-500" />
+      
+      <div className="relative h-full p-10 bg-[#F0EDE5]/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 flex flex-col items-center text-center overflow-hidden transition-all duration-500 group-hover:border-[#C87740]/40 group-hover:bg-[#F0EDE5]/10">
+        
+        {/* Animated Inner Glow */}
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C87740]/15 rounded-full blur-3xl group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
+
+        {/* Icon Container */}
+        <div className="mb-8 p-6 rounded-3xl bg-white/5 text-[#F0EDE5] border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] group-hover:bg-[#C87740] group-hover:text-white transition-all duration-500">
+          {icon}
+        </div>
+
+        <h3 className="text-2xl font-black text-[#F0EDE5] tracking-tight mb-3">
+          {role}
+        </h3>
+        
+        <p className="text-[#F0EDE5]/60 text-sm font-medium leading-relaxed max-w-[200px]">
+          {desc}
+        </p>
+
+        {/* Action Button */}
+        <div className="mt-8 flex items-center gap-2 text-[#C87740] font-black uppercase text-[10px] tracking-[0.2em] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 transition-all duration-500">
+          Enter Portal <ArrowRight size={14} />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default LandingPage;
