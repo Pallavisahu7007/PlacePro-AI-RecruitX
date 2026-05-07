@@ -1,44 +1,50 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react'; // Added hooks
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Layout/Navbar';
 import logo from '../assets/logo.png'; 
+
+// Firebase Imports
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
 import { 
   Cpu, Zap, ShieldCheck, GraduationCap, ChevronRight, 
   Search, BarChart3, Rocket, User, Building, ArrowRight, ArrowUpRight,
-  
-  Layout, 
-
-  Workflow, 
-
-
-  Sparkles, FileUp, Globe, Mail, Link as LinkIcon,
+  Layout, Workflow, Sparkles, FileUp, Globe, Mail, Link as LinkIcon,
   Briefcase, PieChart, Award, Database
 } from 'lucide-react';
 
 const LandingPage = () => {
-  // Theme Palette:
-  // Bone Background: #F0EDE5
-  // Deep Pine Primary: #004643
+  // --- 1. AUTH STATE LOGIC ---
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="bg-[#F0EDE5] min-h-screen font-sans text-[#004643] overflow-x-hidden relative">
       <Navbar />
 
-      {/* --- FLOATING 3D RESUME WIDGET (WhatsApp Style) --- */}
-      <Link to="/dashboard/student/upload"><motion.div 
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 z-50 bg-[#004643] text-[#F0EDE5] p-5 rounded-3xl shadow-[0_20px_50px_rgba(0,70,67,0.4)] cursor-pointer border-2 border-[#F0EDE5] flex flex-col items-center gap-2 group"
-      >
-        <FileUp size={32} className="group-hover:animate-bounce" />
-        <span className="text-[10px] font-black uppercase tracking-tighter opacity-0 opacity-100">Upload</span>
-      </motion.div></Link>
+      {/* --- FLOATING 3D RESUME WIDGET --- */}
+      <Link to="/dashboard/student/upload">
+        <motion.div 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-8 right-8 z-50 bg-[#004643] text-[#F0EDE5] p-5 rounded-3xl shadow-[0_20px_50px_rgba(0,70,67,0.4)] cursor-pointer border-2 border-[#F0EDE5] flex flex-col items-center gap-2 group"
+        >
+          <FileUp size={32} className="group-hover:animate-bounce" />
+          <span className="text-[10px] font-black uppercase tracking-tighter">Upload</span>
+        </motion.div>
+      </Link>
 
       {/* --- HERO SECTION: VIEWPORT LOCKED 3D --- */}
-  <section className="relative h-[95vh] flex items-center overflow-hidden bg-[#F0EDE5]">
+ <section className="relative h-[95vh] flex items-center overflow-hidden bg-[#F0EDE5]">
   {/* --- ENHANCED BACKGROUND GRID --- */}
-  {/* This creates a clean technical blueprint look in the background */}
   <div className="absolute inset-0 pointer-events-none opacity-[0.3]" 
     style={{ 
       backgroundImage: `
@@ -51,7 +57,6 @@ const LandingPage = () => {
     }} 
   />
 
-  {/* Decorative 3D Ambient Orbs */}
   <div className="absolute top-20 left-10 w-72 h-72 bg-[#004643]/10 rounded-full blur-[100px] animate-pulse" />
   <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#004643]/15 rounded-full blur-[120px]" />
 
@@ -65,7 +70,6 @@ const LandingPage = () => {
         transition={{ duration: 1, ease: "easeOut" }}
         className="lg:w-1/2 text-left space-y-8"
       >
-        {/* PlacePro AI RecruitX with Animation */}
         <motion.div 
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -78,20 +82,20 @@ const LandingPage = () => {
         <h1 className="text-6xl lg:text-6xl font-black tracking-tighter leading-[0.9] text-[#004643]">
           Find Your Dream Job <br />
           
-        <motion.span 
-  initial={{ backgroundPosition: "0% 50%" }}
-  animate={{ 
-    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-  }}
-  transition={{ 
-    duration: 6, 
-    repeat: Infinity, 
-    ease: "easeInOut" 
-  }}
-  className="inline-block mt-4 pb-2 text-7xl lg:text-8xl bg-gradient-to-r from-[#2E1F26] via-[#C87740] to-[#2E1F26] bg-clip-text text-transparent bg-clip-text bg-[length:200%_auto] bg-clip-text drop-shadow-[0_10px_15px_rgba(46,31,38,0.2)] font-black tracking-tighter"
->
-  With AI Precision
-</motion.span>
+          <motion.span 
+            initial={{ backgroundPosition: "0% 50%" }}
+            animate={{ 
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="inline-block mt-4 pb-2 text-7xl lg:text-8xl bg-gradient-to-r from-[#2E1F26] via-[#C87740] to-[#2E1F26] bg-clip-text text-transparent bg-clip-text bg-[length:200%_auto] bg-clip-text drop-shadow-[0_10px_15px_rgba(46,31,38,0.2)] font-black tracking-tighter"
+          >
+            With AI Precision
+          </motion.span>
         </h1>
 
         <p className="text-xl text-[#004643]/70 max-w-lg leading-relaxed font-medium">
@@ -99,23 +103,27 @@ const LandingPage = () => {
         </p>
 
         <div className="flex flex-wrap gap-5">
-          <Link to="/register">
-            <motion.button 
-              whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(0, 70, 67, 0.4)" }}
-              className="px-12 py-5 bg-[#004643] text-[#F0EDE5] rounded-2xl font-black text-sm flex items-center gap-3 transition-all border border-[#F0EDE5]/10 shadow-[0_15px_30px_rgba(0,70,67,0.3)]"
-            >
-              Get Started <ArrowRight size={18} />
-            </motion.button>
-          </Link>
-           <Link to="/jobs">
-          <button className="px-12 py-5 bg-white/50 backdrop-blur-sm border-2 border-[#004643] rounded-2xl font-black text-sm text-[#004643] hover:bg-[#004643] hover:text-[#F0EDE5] transition-all shadow-md">
-            Explore Positions
-          </button>
+          {/* --- CONDITIONALLY RENDERED BUTTON --- */}
+          {!user && (
+            <Link to="/register">
+              <motion.button 
+                whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(0, 70, 67, 0.4)" }}
+                className="px-12 py-5 bg-[#004643] text-[#F0EDE5] rounded-2xl font-black text-sm flex items-center gap-3 transition-all border border-[#F0EDE5]/10 shadow-[0_15px_30px_rgba(0,70,67,0.3)]"
+              >
+                Get Started <ArrowRight size={18} />
+              </motion.button>
+            </Link>
+          )}
+
+          <Link to="/jobs">
+            <button className="px-12 py-5 bg-white/50 backdrop-blur-sm border-2 border-[#004643] rounded-2xl font-black text-sm text-[#004643] hover:bg-[#004643] hover:text-[#F0EDE5] transition-all shadow-md">
+              Explore Positions
+            </button>
           </Link>
         </div>
       </motion.div>
 
-      {/* Right Visual: 3D Image with Heavy Shadows */}
+      {/* Right Visual */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -135,16 +143,16 @@ const LandingPage = () => {
             />
           </div>
 
-<motion.div 
-  animate={{ y: [0, 8, 0] }} 
-  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-  className="absolute -top-6 -left-6 p-4 px-6 bg-[#00A19B]/60 backdrop-blur-lg text-white rounded-2xl shadow-[0_20px_40px_rgba(200,119,64,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center gap-3 border border-white/30"
->
-  <ShieldCheck size={20} className="text-white drop-shadow-md" />
-  <span className="text-xs font-black uppercase tracking-[0.15em] drop-shadow-md">
-    AI Verified
-  </span>
-</motion.div>
+          <motion.div 
+            animate={{ y: [0, 8, 0] }} 
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-6 -left-6 p-4 px-6 bg-[#00A19B]/60 backdrop-blur-lg text-white rounded-2xl shadow-[0_20px_40px_rgba(200,119,64,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center gap-3 border border-white/30"
+          >
+            <ShieldCheck size={20} className="text-white drop-shadow-md" />
+            <span className="text-xs font-black uppercase tracking-[0.15em] drop-shadow-md">
+              AI Verified
+            </span>
+          </motion.div>
         </motion.div>
       </motion.div>
     </div>
@@ -236,10 +244,30 @@ const LandingPage = () => {
     />
     
     <div className="grid md:grid-cols-3 gap-10 mt-24 max-w-6xl mx-auto">
-      <RoleCard icon={<GraduationCap size={40} />} role="Student" desc="Access placement drives & mock tests." />
-      <RoleCard icon={<Building size={40} />} role="Recruiter" desc="Manage job postings & NLP screening." />
-      <RoleCard icon={<User size={40} />} role="TPO Admin" desc="University-wide analytics & data sync." />
-    </div>
+  <Link to="/register" className="group">
+    <RoleCard 
+      icon={<GraduationCap size={40} />} 
+      role="Student" 
+      desc="Access placement drives & mock tests." 
+    />
+  </Link>
+
+  <Link to="/register" className="group">
+    <RoleCard 
+      icon={<Building size={40} />} 
+      role="Recruiter" 
+      desc="Manage job postings & NLP screening." 
+    />
+  </Link>
+
+  <Link to="/register" className="group">
+    <RoleCard 
+      icon={<User size={40} />} 
+      role="TPO Admin" 
+      desc="University-wide analytics & data sync." 
+    />
+  </Link>
+</div>
   </div>
 </section>
       {/* --- JOB OPPORTUNITIES: 3D GRID --- */}
@@ -282,43 +310,49 @@ const LandingPage = () => {
     
 
       {/* --- FOOTER: STRUCTURED 3D --- */}
-     <footer className="relative py-24 bg-[#F0EDE5] border-t border-[#004643]/10 overflow-hidden">
-  {/* Subtly faded background grid for technical continuity */}
-  <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-    style={{ backgroundImage: `linear-gradient(#004643 1px, transparent 1px), linear-gradient(90deg, #004643 1px, transparent 1px)`, backgroundSize: '40px 40px' }} 
+   <footer className="relative py-6 bg-[#004643] border-t border-white/10 overflow-hidden">
+  {/* Subtly faded background grid - adjusted to White for visibility on Green */}
+  <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+    style={{ 
+      backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`, 
+      backgroundSize: '40px 40px' 
+    }} 
   />
 
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
+  {/* Changed max-w-7xl to max-w-6xl for a shorter, more balanced width */}
+  <div className="max-w-6xl mx-auto px-6 relative z-10">
     <div className="grid md:grid-cols-3 gap-16 items-start">
       
       {/* Brand Section */}
-  <div className="space-y-6 text-center md:text-left">
-  {/* --- LOGO IMAGE --- */}
-  <div className="flex justify-center md:justify-start">
-    <img 
-      src={logo} 
-      alt="PlacePro AI Logo" 
-      className="h-12 w-auto mb-2 opacity-90 hover:opacity-100 transition-opacity" 
-    />
-  </div>
+      <div className="space-y-6 text-center md:text-left">
+        <div className="flex justify-center md:justify-start">
+          <img 
+            src={logo} 
+            alt="PlacePro AI Logo" 
+            className="h-12 w-auto mb-2" 
+          />
+        </div>
 
-  {/* --- BRAND TITLE --- */}
-  <h3 className="text-5xl font-black text-[#004643] tracking-tighter uppercase italic">
-    PlacePro <span className="text-[#C87740]">AI</span>
-  </h3>
+        {/* Brand Title - Bone White with Caramel AI */}
+        <h3 className="text-5xl font-black text-[#F0EDE5] tracking-tighter uppercase">
+          PlacePro <span className="text-[#C87740]">AI</span>
+        </h3>
 
-  {/* --- TAGLINE --- */}
-  <p className="text-sm font-bold text-[#004643]/60 leading-relaxed max-w-xs mx-auto md:mx-0">
-    A next-generation platform for campus hiring, engineered to bridge the gap between talent and industry.
-  </p>
-</div>
-      {/* Quick Links with 3D Hover effect */}
+        <p className="text-sm font-bold text-[#F0EDE5]/60 leading-relaxed max-w-xs mx-auto md:mx-0">
+          A next-generation platform for campus hiring, engineered to bridge the gap between talent and industry.
+        </p>
+      </div>
+
+      {/* Quick Links */}
       <div className="flex flex-col gap-6 items-center md:items-start">
-        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-[#004643]/40">Sitemap</span>
+        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-white/30">Sitemap</span>
         <div className="grid grid-cols-2 gap-x-12 gap-y-4">
-          {['Job Board', 'Hackathons', 'Help Desk', 'About Us'].map((item) => (
-            <motion.div key={item} whileHover={{ x: 5, color: '#C87740' }} className="cursor-pointer">
-              <Link to={`/${item.toLowerCase().replace(' ', '')}`} className="text-sm font-black text-[#004643] transition-colors">
+          {['Job Board', 'Hackathons', 'Help Desk', 'Upload Resume'].map((item) => (
+            <motion.div key={item} whileHover={{ x: 5 }} className="cursor-pointer">
+              <Link 
+                to={`/${item.toLowerCase().replace(' ', '')}`} 
+                className="text-sm font-black text-[#F0EDE5] hover:text-[#C87740] transition-colors"
+              >
                 {item}
               </Link>
             </motion.div>
@@ -326,42 +360,39 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Connect Section with Floating Icons */}
+      {/* Connect Section */}
       <div className="flex flex-col gap-8 items-center md:items-end">
-        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-[#004643]/40">Connect</span>
-        {/* Replace the social icons map with this version */}
-<div className="flex gap-4">
-  {[
-    { icon: <Globe size={20} />, label: 'Web' },
-    { icon: <Mail size={20} />, label: 'Mail' },
-    { icon: <LinkIcon size={20} />, label: 'Profile' } // Changed to a standard Link icon
-  ].map((social, i) => (
-    <motion.div
-      key={i}
-      whileHover={{ 
-        y: -8, 
-        scale: 1.1, 
-        backgroundColor: '#C87740', // Transitions to your Caramel brand color
-        boxShadow: "0px 15px 30px rgba(200, 119, 64, 0.4)" 
-      }}
-      className="p-4 bg-[#004643] text-[#F0EDE5] rounded-2xl cursor-pointer shadow-[0_10px_20px_rgba(0,70,67,0.2)] transition-all duration-300"
-    >
-      {social.icon}
-    </motion.div>
-  ))}
-</div>
-      
+        <span className="font-black uppercase tracking-[0.3em] text-[10px] text-white/30">Coming Soon</span>
+        <div className="flex gap-4">
+          {[
+            { icon: <Globe size={20} />, label: 'Web' },
+            { icon: <Mail size={20} />, label: 'Mail' },
+            { icon: <LinkIcon size={20} />, label: 'Profile' }
+          ].map((social, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ 
+                y: -8, 
+                backgroundColor: '#C87740',
+                boxShadow: "0px 15px 30px rgba(200, 119, 64, 0.4)" 
+              }}
+              className="p-4 bg-white/10 text-[#F0EDE5] rounded-2xl cursor-pointer border border-white/10 backdrop-blur-sm transition-all duration-300"
+            >
+              {social.icon}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
 
     {/* Signature Bottom Bar */}
-    <div className="mt-24 pt-12 border-t border-[#004643]/5 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div className="text-[10px] font-black uppercase tracking-[0.4em] text-[#004643]/40">
+    <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">
         © 2026 PlacePro AI 
       </div>
       <div className="flex gap-8">
-        <span className="text-[9px] font-black uppercase tracking-widest text-[#004643]/30 cursor-pointer hover:text-[#C87740] transition-colors">Privacy Policy</span>
-        <span className="text-[9px] font-black uppercase tracking-widest text-[#004643]/30 cursor-pointer hover:text-[#C87740] transition-colors">Terms of Service</span>
+        <span className="text-[9px] font-black uppercase tracking-widest text-white/20 cursor-pointer hover:text-[#C87740] transition-colors">Privacy Policy</span>
+        <span className="text-[9px] font-black uppercase tracking-widest text-white/20 cursor-pointer hover:text-[#C87740] transition-colors">Terms of Service</span>
       </div>
     </div>
   </div>
